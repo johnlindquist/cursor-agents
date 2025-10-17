@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAWBOOK - The Social Network for Dogs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5d76e 0%, #ffd700 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .paw-icon {
+            font-size: 36px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 1000px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Social Network Hub */
+        .network-hub {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+            height: 400px;
+        }
+
+        .center-bone {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        .bone-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /* Dog Profiles Grid */
+        .dog-profiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .dog-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: white;
+            position: relative;
+        }
+
+        .dog-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .dog-card.golden {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .dog-card.bulldog {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .dog-card.poodle {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .dog-card.corgi {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .dog-emoji {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .dog-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .dog-breed {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid #eee;
+        }
+
+        .feature {
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .feature-name {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff6b6b, #ff9a9e);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            text-align: center;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            .dog-profiles {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+
+        /* Animations */
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+
+        .paw-icon {
+            animation: wobble 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="paw-icon">🐾</span>
+            <span>PAWBOOK</span>
+        </div>
+        <nav>
+            <a href="#dogs">Dogs</a>
+            <a href="#features">Features</a>
+            <a href="#community">Community</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Welcome to PAWBOOK</h1>
+            <p class="subtitle">The Social Network for Dogs & Their Enthusiasts</p>
+
+            <!-- Network Hub -->
+            <div class="network-hub">
+                <div class="center-bone">
+                    <div class="bone-text">
+                        <span>🦴</span>
+                        <span>PAWBOOK</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dog Profiles -->
+            <section id="dogs">
+                <h2 style="color: #333; margin-bottom: 30px;">Meet Your Pup Friends</h2>
+                <div class="dog-profiles">
+                    <div class="dog-card golden">
+                        <div class="dog-emoji">🐕‍🦺</div>
+                        <div class="dog-name">Buddy</div>
+                        <div class="dog-breed">Golden Retriever</div>
+                    </div>
+
+                    <div class="dog-card bulldog">
+                        <div class="dog-emoji">🐕</div>
+                        <div class="dog-name">Rocky</div>
+                        <div class="dog-breed">Bulldog</div>
+                    </div>
+
+                    <div class="dog-card poodle">
+                        <div class="dog-emoji">🐩</div>
+                        <div class="dog-name">Fluffy</div>
+                        <div class="dog-breed">Poodle</div>
+                    </div>
+
+                    <div class="dog-card corgi">
+                        <div class="dog-emoji">🐕</div>
+                        <div class="dog-name">Coco</div>
+                        <div class="dog-breed">Corgi</div>
+                    </div>
+
+                    <div class="dog-card">
+                        <div class="dog-emoji">🐕</div>
+                        <div class="dog-name">Max</div>
+                        <div class="dog-breed">Labrador</div>
+                    </div>
+
+                    <div class="dog-card golden">
+                        <div class="dog-emoji">🐕</div>
+                        <div class="dog-name">Daisy</div>
+                        <div class="dog-breed">Beagle</div>
+                    </div>
+
+                    <div class="dog-card bulldog">
+                        <div class="dog-emoji">🐕</div>
+                        <div class="dog-name">Charlie</div>
+                        <div class="dog-breed">Dachshund</div>
+                    </div>
+
+                    <div class="dog-card poodle">
+                        <div class="dog-emoji">🐩</div>
+                        <div class="dog-name">Bella</div>
+                        <div class="dog-breed">Poodle Mix</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section id="features">
+                <h2 style="color: #333; margin: 40px 0 30px 0;">Core Features</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🎾</div>
+                        <div class="feature-name">Fetch!</div>
+                        <div class="feature-desc">Share your favorite toys and tricks</div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🐕‍🦺</div>
+                        <div class="feature-name">Playdate</div>
+                        <div class="feature-desc">Schedule meetups with nearby pups</div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">⭐</div>
+                        <div class="feature-name">Good Boy/Girl</div>
+                        <div class="feature-desc">Get recognized for good behavior</div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🌳</div>
+                        <div class="feature-name">Parks</div>
+                        <div class="feature-desc">Discover dog-friendly parks nearby</div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🎓</div>
+                        <div class="feature-name">Trainers</div>
+                        <div class="feature-desc">Connect with professional dog trainers</div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">🏪</div>
+                        <div class="feature-name">Pet Shops</div>
+                        <div class="feature-desc">Find supplies and treats near you</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h2 style="color: #333; margin-bottom: 20px;">Ready to Join the Pack?</h2>
+                <button class="cta-button">Start Your Pawbook Journey 🐾</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>🐾 PAWBOOK - Where Dogs Connect & Make Friends 🐾</p>
+        <p style="margin-top: 10px; font-size: 12px; opacity: 0.7;">Making the dog community stronger, one pup at a time.</p>
+    </footer>
+
+    <script>
+        // Add interactivity
+        document.querySelectorAll('.dog-card').forEach(card => {
+            card.addEventListener('click', function() {
+                alert('🐾 ' + this.querySelector('.dog-name').textContent + ' says: Woof Woof!');
+            });
+        });
+
+        document.querySelector('.cta-button').addEventListener('click', function() {
+            alert('Welcome to PAWBOOK! 🐾 Your dog social profile is being created...');
+        });
+
+        // Add scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.dog-card, .feature').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

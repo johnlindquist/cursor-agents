@@ -1,3 +1,5 @@
 import "./spanish-counter"
 import "./into"
 import "./download-reader"
+import "./summarize-url"
+import "./image-generator"

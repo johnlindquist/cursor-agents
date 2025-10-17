@@ -5,7 +5,8 @@
     },
     "tools": {
       "command": "bun",
-      "args": [".cursor/mcp/index.ts"]
+      "args": [".cursor/mcp/index.ts"],
+      "timeout": 60000
     }
   }
 }
