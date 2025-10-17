@@ -1,12 +1,11 @@
-const fruits = ["apple", "banana", "cherry"]
-
-const riddleGenerator = async (fruit: string) => {
-    const prompt = ` Please write an extremely brief riddle about the following fruit: ${fruit}`
+const fileSummaryGenerator = async (file: string) => {
+    const prompt = ` Please write a summary of the following file: ${file}`
     const child = Bun.spawn(["cursor-agent", "--model", "cheetah", "--print", prompt])
     const result = await child.stdout.text()
     return result
 }
 
-const riddles = await Promise.all(fruits.map(riddleGenerator))
+const files = ["index.ts", "package.json", "README.md"]
 
-console.log(riddles)
+const summaries = await Promise.all(files.map(fileSummaryGenerator))
+console.log(summaries)
