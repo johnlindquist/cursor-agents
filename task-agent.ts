@@ -91,23 +91,10 @@ const printEndpointResults = (results: EndpointResult[]): void => {
 const endpointTasks: EndpointTask[] = [
     {
         id: "store-latest",
-        name: "Get Latest Store Items",
-        description: "Retrieve the latest items added to the store",
+        name: "Get Earliest Store Items",
+        description: "Retrieve the earliest items from the store",
         methods: ["GET"],
-        path: "/api/store/latest",
-        responseExample: `{
-  "total": 5,
-  "retrieved": 3,
-  "items": [
-    {
-      "id": 1,
-      "name": "Wireless Headphones",
-      "price": 79.99,
-      "category": "Electronics",
-      "inStock": true
-    }
-  ]
-}`,
+        path: "/api/store/earliest",
     },
     // Add more endpoints here
 ];

@@ -78,6 +78,7 @@ Bun.serve({
                             "GET /api/demo": "Retrieve all demo objects",
                             "GET /api/demo/:id": "Get a specific demo object",
                             "GET /api/store/latest": "Get the latest items from the store",
+                            "GET /api/store/earliest": "Get the earliest items from the store",
                         },
                     }),
                     { headers: { "Content-Type": "application/json" } }
@@ -149,9 +150,50 @@ Bun.serve({
                 });
             },
         },
+        "/api/store/earliest": {
+            GET: (req) => {
+                try {
+                    // Optional query parameter to limit results (default: 10 items)
+                    const url = new URL(req.url);
+                    const limit = parseInt(url.searchParams.get("limit") || "10");
+
+                    // Validate limit parameter
+                    if (isNaN(limit) || limit < 1) {
+                        return new Response(JSON.stringify({ 
+                            error: "Invalid limit parameter. Must be a positive number." 
+                        }), {
+                            status: 400,
+                            headers: { "Content-Type": "application/json" },
+                        });
+                    }
+
+                    // Sort by earliest added date and slice to limit
+                    const earliestItems = storeItems
+                        .sort((a, b) => new Date(a.addedAt).getTime() - new Date(b.addedAt).getTime())
+                        .slice(0, limit);
+
+                    return new Response(JSON.stringify({
+                        total: storeItems.length,
+                        retrieved: earliestItems.length,
+                        items: earliestItems,
+                    }, null, 2), {
+                        status: 200,
+                        headers: { "Content-Type": "application/json" },
+                    });
+                } catch (error) {
+                    return new Response(JSON.stringify({ 
+                        error: "Internal server error while retrieving earliest items" 
+                    }), {
+                        status: 500,
+                        headers: { "Content-Type": "application/json" },
+                    });
+                }
+            },
+        },
     },
 });
 
 console.log("🚀 Server running at http://localhost:3000");
 console.log("📝 POST demo objects to http://localhost:3000/api/demo");
 console.log("📦 GET latest store items at http://localhost:3000/api/store/latest");
+console.log("📦 GET earliest store items at http://localhost:3000/api/store/earliest");
