@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "~/.bun/bin/bun ./hooks/before-submit-prompt.ts"
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "~/.bun/bin/bun ./hooks/before-shell-execution.ts"
+      }
+    ]
+  }
+}

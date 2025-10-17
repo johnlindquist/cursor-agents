@@ -41,6 +41,7 @@
   "homepage": "https://github.com/johnlindquist/cursor-agents#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.1",
+    "cursor-hooks": "^1.1.6",
     "mcpez": "^1.2.1"
   }
 }
