@@ -3,7 +3,7 @@
     "deepwiki": {
       "url": "https://mcp.deepwiki.com/sse"
     },
-    "hello": {
+    "tools": {
       "command": "bun",
       "args": [".cursor/mcp/index.ts"]
     }
