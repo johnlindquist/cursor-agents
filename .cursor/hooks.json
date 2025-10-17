@@ -10,6 +10,11 @@
       {
         "command": "~/.bun/bin/bun ./hooks/before-shell-execution.ts"
       }
+    ],
+    "stop": [
+      {
+        "command": "~/.bun/bin/bun ./hooks/stop.ts"
+      }
     ]
   }
 }
