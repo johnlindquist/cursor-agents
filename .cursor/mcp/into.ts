@@ -10,10 +10,7 @@ const intoMarkdownHandler: PromptHandler = async ({ url }) => {
                 role: "assistant",
                 content: {
                     type: "text",
-                    text: `${markdown}
----
-
-Please summarize the above webpage`
+                    text: markdown
                 }
             }
         ]

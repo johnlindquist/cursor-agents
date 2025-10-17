@@ -38,5 +38,9 @@
   "bugs": {
     "url": "https://github.com/johnlindquist/cursor-agents/issues"
   },
-  "homepage": "https://github.com/johnlindquist/cursor-agents#readme"
+  "homepage": "https://github.com/johnlindquist/cursor-agents#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.1",
+    "mcpez": "^1.2.1"
+  }
 }
